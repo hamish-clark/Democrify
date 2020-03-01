@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<title> Request </title>
+
+	<meta charset = "utf-8">
+	<link rel = "stylesheet" type = "text/css" href = "../static/layout.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	
+	<script>
+
+		// First, checks if it isn't implemented yet.
+		if (!String.prototype.format) {
+		  String.prototype.format = function() {
+			var args = arguments;
+			return this.replace(/{(\d+)}/g, function(match, number) { 
+			  return typeof args[number] != 'undefined'
+				? args[number]
+				: match
+			  ;
+			});
+		  };
+		}
+		
+	</script>
+
+	<script src="../static/channel.js"> </script>
+	
+</head>
+
+<body>
+
+	{% block body %}{% endblock %}
+		
+</body>
+
+</html>

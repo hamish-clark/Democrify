@@ -1,0 +1,125 @@
+
+{% extends 'layout.html' %}
+	
+{% block body %}
+
+	<script>
+		function getInput(){
+			return document.getElementById("searchInput").value
+		}
+			
+	</script>
+	
+	<div id = "outer">
+	
+		<div id = "headerBar">
+		
+			<img id = "profileIcon" src = "{{ channel.service.current_user()['images'][0]['url'] }}">
+			<h2> Channel {{ channel.channelNumber }} </h2>
+			
+			<h4> {{ channel.service.current_user()['display_name'] }} </h4>
+			
+			<div id="devices">
+				<div id="devices__drawer">
+
+				{% for device in channel.getDevices()%}
+					
+						{% if device["is_active"] == True %}
+						
+							<div class="device" style="color:white; order:1"> {{ device['name'] }} </div>
+						
+						{% else %}
+						<a style="order:2" href= "/channel/{{ channel.channelNumber}}/transfer_device/{{ device.id }}">
+							<div class="device" style="color:#328c56;"> {{ device['name'] }} </div>			
+						</a>
+						{% endif %}
+					
+					
+				
+				{% endfor %}
+				</div>
+			</div>
+
+			<img id = "qrCodeIcon" src = "../static/qrCodes/{{ channel.channelNumber }}.png">
+
+		</div>
+	
+		{% if channel.get_current_song() != None %}
+
+			<div id="currentSong">
+
+				<img src = "{{ channel.get_current_song().item.album['images'][0]['url'] }}">
+
+				<div>
+
+					
+
+						<p> {{ channel.get_current_song().item.name}} </p>
+						<p> {{ channel.get_current_song().item.album.artists[0].name}} </p>
+						<!-- <p> {{ channel.get_current_song().progress_ms}} / {{ channel.get_current_song().item.duration_ms}} </p>
+						<p> {{ channel.get_current_song().is_playing}} </p> -->
+						
+						<a href="/channel/{{ channel.channelNumber}}/skip"> Skip </a>
+
+
+
+				</div>
+
+			</div>
+
+		{% else %}
+
+		{% endif %}
+        
+	
+        <div id = "controls">
+
+			<input id = "searchInput" placeholder="Search Song"> </input>
+
+            <!-- Search Button -->
+            <a onclick="window.location.href= '/channel/{{ channel.channelNumber}}/requestSong/' + getInput()">
+                <img id = "searchIcon" src = "../static/searchIcon.png"> </img>
+			</a>
+
+        </div>
+
+		<div id = "songRequestsContainer">
+		
+		{% for song in channel.songs %}
+			
+			<div id = "contentOuter">
+				<!--<h2 id = "requestName"> Requested by Doot Doot </h2>-->
+				<div id = "content"> 
+				
+					<img src = '{{ song.coverImageUrl }}' id = "coverImage">
+					
+					<div id = "infoContainer">
+						<h3 id = "songName">   {{ song.songName}} </h3>
+						<h3 id = "artistName"> {{ song.artistName }} </h3>
+						<h3 id = "albulmName"> {{ song.albumName }} </h3>
+						<!-- <a href= '/channel/{{ channel.channelNumber}}/playSong/{{ song.spotifyUri }}'> play | </a> -->
+					</div>
+
+			
+				</div>
+			</div>
+			
+		{% endfor %}
+		
+		</div>
+
+		{% if channel.get_current_song() != None %}
+
+			<div id="playback_bar"
+					style="right: {{ (100-100 * channel.get_current_song().progress_ms  /  channel.get_current_song().item.duration_ms) }}% "
+			></div>
+
+		{% endif %}
+		
+		<div id = "footer"> 
+			
+		</div>
+		
+	</div> <!--outer-->
+		
+{% endblock %}

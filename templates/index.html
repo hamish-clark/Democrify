@@ -1,0 +1,28 @@
+
+{% extends 'layout.html' %}
+
+{% block body %}
+
+	<div id = "outer">
+
+        <h1> Democrify </h1>
+
+        <h2> </h2><a href = "createChannel"> Create Channel </a> </h2>
+
+        <h2> Channels </h2>
+
+        <list>
+
+            {% for channel in channels %}
+
+                <li> <a href = "channel/{{ channel }}"> Channel {{  channel }} </a> </li>
+
+            {% endfor %}
+
+        </list>
+
+
+
+	</div> <!--outer-->
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{
+	"username"		: "mishmouse224",
+	"client_id" 	: "9b100b0f5f8641a3a712b982d726b2c0",
+	"client_secret"	: "7d7e0748a1c14ed78e7aa0d7d1d712b1",
+	"redirect_uri" 	: "http://mishmouse224.pythonanywhere.com/processLogin/"
+}
