@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 {% extends 'layout.html' %}
 	
@@ -122,4 +123,73 @@
 		
 	</div> <!--outer-->
 		
+=======
+
+{% extends 'layout.html' %}
+	
+{% block body %}
+
+	<script>
+		function getInput(){
+	
+			return document.getElementById("searchInput").value
+			}
+			
+	</script>
+	
+	<div id = "outer">
+	
+		<div id = "headerBar"> 
+			
+			<h2> Device {{ channel.getActiveDevice()['name'] }} </h2>
+			<img id = "profileIcon" src = "{{ channel.service.current_user()['images'][0]['url'] }}"> 
+			<h2 id = "channelNumberLabel"> Channel {{ channel.channelNumber }} </h2>
+			<h2 id = "channelHostLabel" > Hosted By {{ channel.service.current_user()['display_name'] }} </h2>
+				
+			
+				
+			
+			
+			 
+			
+		</div>
+		
+		<img id = "qrCodeIcon" src = "../static/qrCodes/{{ channel.channelNumber }}.png">
+		
+		<input id = "searchInput" placeholder="Search Song"> </input>
+		
+		<!-- Search Button -->
+		<a onclick="window.location.href= '/channel/{{ channel.channelNumber}}/requestSong/' + getInput()"  href = "#"> 
+			<img id = "searchIcon" src = "../static/searchIcon.png"> </img>
+		</a>
+		
+		
+		<div id = "songRequestsContainer">
+		
+		{% for song in channel.songs %}
+			
+			<div id = "contentOuter">
+				<!--<h2 id = "requestName"> Requested by Doot Doot </h2>-->
+				<div id = "content"> 
+				
+					<img src = '{{ song.coverImageUrl }}' id = "coverImage">
+					
+					<div id = "infoContainer">
+						<h3 id = "songName">   {{ song.songName}} </h3>
+						<h3 id = "artistName"> {{ song.artistName }} </h3>
+						<h3 id = "albulmName"> {{ song.albumName }} </h3>
+					</div>
+				</div>
+			</div>
+			
+		{% endfor %}
+		
+		</div>
+		
+	</div> <!--outer-->
+		
+
+
+	
+>>>>>>> d879de03cfa1f199f3015592751264f91f1daaae
 {% endblock %}
